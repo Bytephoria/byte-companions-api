@@ -17,4 +17,5 @@ public final class PoseOutput {
     public Float rightLegX;
     public Float rightLegY;
     public Float rightLegZ;
+
 }
