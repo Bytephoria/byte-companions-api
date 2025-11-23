@@ -33,5 +33,4 @@ public record CompanionAppearance(
         return cloneWithCustomName(this, customName);
     }
 
-
 }
