@@ -1,3 +1,5 @@
+> ⚠️ API IS STILL UNDER DEVELOPMENT
+
 # ByteCompanions API
 
 <p align="center">
