@@ -1,61 +1,41 @@
 package team.bytephoria.bytecompanions.api;
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 /**
- * Provides global access to the {@link ByteCompanionsAPI} instance.
- * Manages registration, retrieval, and cleanup of the API.
+ * Holds the global singleton instance of {@link ByteCompanionsAPI}.
+ * Managed internally by the plugin — external code should never call set/reset.
  */
 public final class ByteCompanionsAPIProvider {
 
-    /** Global API instance available to consumers. */
     private static ByteCompanionsAPI instance;
 
     private ByteCompanionsAPIProvider() {
         throw new UnsupportedOperationException("This class cannot be instantiated.");
     }
 
-    /**
-     * Returns the active {@link ByteCompanionsAPI} instance.
-     *
-     * @return the initialized API instance
-     * @throws IllegalStateException if the API is not set
-     */
-    public static ByteCompanionsAPI getInstance() {
-        if (instance == null) {
-            throw new IllegalStateException("ByteCompanionsAPIProvider has not been initialized.");
-        }
-
-        return instance;
+    public static @NotNull ByteCompanionsAPI getInstance() {
+        return Objects.requireNonNull(instance,
+                "ByteCompanions API is not available yet. Is the plugin enabled?");
     }
 
-    /**
-     * Sets the global API instance.
-     *
-     * @param api the API implementation to register
-     * @throws IllegalStateException if an instance is already set
-     */
-    public static void setInstance(final @Nullable ByteCompanionsAPI api) {
+    public static void setInstance(final @NotNull ByteCompanionsAPI api) {
+        Objects.requireNonNull(api, "API instance must not be null.");
         if (instance != null) {
-            throw new IllegalStateException("ByteCompanionsAPIProvider has already been initialized.");
+            throw new IllegalStateException("ByteCompanionsAPIProvider instance is already set.");
         }
 
         instance = api;
     }
 
-    /**
-     * Clears the current API instance.
-     */
-    public static void clear() {
+    public static boolean isAvailable() {
+        return instance != null;
+    }
+
+    public static void resetInstance() {
         instance = null;
     }
 
-    /**
-     * Checks if the API has been initialized.
-     *
-     * @return true if an API instance is registered
-     */
-    public static boolean isInitialized() {
-        return instance != null;
-    }
 }
