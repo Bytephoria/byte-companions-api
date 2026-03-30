@@ -12,6 +12,9 @@ public enum EquipCompanionResult {
     COMPANION_TYPE_NOT_FOUND,
 
     /** The player data is not loaded (not online or cache miss). */
-    PLAYER_NOT_LOADED
+    PLAYER_NOT_LOADED,
+
+    /** The equip was cancelled by a {@link team.bytephoria.bytecompanions.bukkitapi.event.CompanionEquipEvent} listener. */
+    CANCELLED
 
 }

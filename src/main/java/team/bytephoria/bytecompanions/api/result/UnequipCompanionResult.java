@@ -9,6 +9,9 @@ public enum UnequipCompanionResult {
     NO_COMPANION_ACTIVE,
 
     /** The player data is not loaded (not online or cache miss). */
-    PLAYER_NOT_LOADED
+    PLAYER_NOT_LOADED,
+
+    /** The unequip was cancelled by a {@link team.bytephoria.bytecompanions.bukkitapi.event.CompanionUnequipEvent} listener. */
+    CANCELLED
 
 }

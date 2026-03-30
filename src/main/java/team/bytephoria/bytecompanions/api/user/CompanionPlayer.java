@@ -12,7 +12,7 @@ import java.util.UUID;
  * Holds the companion state associated with a specific player.
  *
  * <p>Instances are created when a player joins and destroyed when they leave.
- * Always retrieve a fresh reference from {@link CompanionPlayerService} rather than caching it.
+ * Always retrieve a fresh reference from {@link UserManager} rather than caching it.
  */
 public interface CompanionPlayer {
 

@@ -8,7 +8,7 @@ import team.bytephoria.bytecompanions.api.companion.CompanionTypeRegistry;
 import team.bytephoria.bytecompanions.api.companion.animations.registry.CompanionAnimationRegistry;
 import team.bytephoria.bytecompanions.api.companion.builder.CompanionTypeBuilder;
 import team.bytephoria.bytecompanions.api.user.CompanionPlayer;
-import team.bytephoria.bytecompanions.api.user.CompanionPlayerService;
+import team.bytephoria.bytecompanions.api.user.UserManager;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -51,11 +51,13 @@ public interface ByteCompanionsAPI {
     // ── Services ───────────────────────────────────────────────────────────
 
     /**
-     * Provides access to companion player data and async storage lookups.
+     * Manages access to loaded companion player instances.
+     * Use {@link UserManager#find(java.util.UUID)} for online players and
+     * {@link UserManager#findAsync(java.util.UUID)} for offline lookups.
      *
-     * @return the companion player service
+     * @return the user manager
      */
-    @NotNull CompanionPlayerService playerService();
+    @NotNull UserManager userManager();
 
     /**
      * Registry for companion types. Use this to register custom companion types
@@ -99,7 +101,7 @@ public interface ByteCompanionsAPI {
      * @return an optional containing the companion player
      */
     default @NotNull Optional<CompanionPlayer> getPlayer(final @NotNull UUID playerId) {
-        return this.playerService().find(playerId);
+        return this.userManager().find(playerId);
     }
 
     /**
