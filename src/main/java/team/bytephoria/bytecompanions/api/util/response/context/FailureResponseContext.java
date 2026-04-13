@@ -11,7 +11,7 @@ record FailureResponseContext<T, R>(R result) implements ResponseContext<T, R> {
         Objects.requireNonNull(result, "result cannot be null");
     }
 
-    @Contract(pure = true)
+    @Contract("-> null")
     @Override
     public @Nullable T value() {
         return null;

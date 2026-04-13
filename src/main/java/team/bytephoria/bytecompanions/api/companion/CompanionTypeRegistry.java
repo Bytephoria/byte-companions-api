@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface CompanionTypeRegistry {
 
-    @Nullable CompanionType get(final @NotNull String id);
+    @Nullable CompanionType getOrNull(final @NotNull String id);
 
-    @NotNull Optional<CompanionType> getOptional(final @NotNull String id);
+    @NotNull Optional<CompanionType> get(final @NotNull String id);
 
-    void registerType(final @NotNull String id, final @NotNull CompanionType companionType);
+    void register(final @NotNull String id, final @NotNull CompanionType companionType);
 
     @NotNull Collection<CompanionType> all();
 

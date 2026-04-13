@@ -11,6 +11,7 @@ public interface ResponseContext<V, R> extends Response<R> {
         return new FailureResponseContext<>(result);
     }
 
+    @Contract(value = "_,_ -> new", pure = true)
     static <V, R> @NotNull ResponseContext<V, R> success(final @NotNull V value, final @NotNull R result) {
         return new SuccessResponseContext<>(value, result);
     }

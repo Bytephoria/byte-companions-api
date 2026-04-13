@@ -12,7 +12,7 @@ public interface Response<R> {
         return new SuccessResponse<>(result);
     }
 
-    R result();
+    @NotNull R result();
 
     boolean success();
 
