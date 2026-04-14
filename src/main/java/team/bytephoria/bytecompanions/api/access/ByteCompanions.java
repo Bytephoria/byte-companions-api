@@ -1,6 +1,7 @@
 package team.bytephoria.bytecompanions.api.access;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import team.bytephoria.bytecompanions.api.companion.Companion;
 import team.bytephoria.bytecompanions.api.companion.CompanionManager;
 import team.bytephoria.bytecompanions.api.companion.CompanionType;
@@ -21,15 +22,21 @@ public interface ByteCompanions {
     @NotNull CompanionManager companionManager();
     @NotNull AnimationRegistry animationRegistry();
 
+    @Nullable CompanionPlayer getPlayerOrNull(@NotNull UUID playerId);
     @NotNull Optional<CompanionPlayer> getPlayer(final @NotNull UUID playerId);
 
-    default Optional<Companion> getCompanion(final @NotNull UUID playerId) {
-        final CompanionPlayer companionPlayer = this.getPlayer(playerId).orElse(null);
+    default @Nullable Companion getCompanionOrNull(final @NotNull UUID playerId) {
+        final CompanionPlayer companionPlayer = this.getPlayerOrNull(playerId);
         if (companionPlayer == null) {
-            return Optional.empty();
+            return null;
         }
 
-        return companionPlayer.companion();
+        return companionPlayer.companionOrNull();
+    }
+
+    default Optional<Companion> getCompanion(final @NotNull UUID playerId) {
+        final Companion companion = this.getCompanionOrNull(playerId);
+        return Optional.ofNullable(companion);
     }
 
     default @NotNull Optional<CompanionType> getType(final @NotNull String typeId) {
