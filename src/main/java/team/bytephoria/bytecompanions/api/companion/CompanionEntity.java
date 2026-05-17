@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import team.bytephoria.bytecompanions.api.companion.animation.Animations;
 import team.bytephoria.bytecompanions.api.companion.data.CompanionOverlayData;
+import team.bytephoria.bytecompanions.api.companion.data.OverlayData;
 
 import java.util.Collections;
 import java.util.Map;
@@ -65,7 +66,7 @@ public interface CompanionEntity {
         return false;
     }
 
-    default boolean addOverlay(final @NotNull String overlayId) {
+    default boolean addOverlay(final @NotNull String overlayId, final @NotNull OverlayData overlayData) {
         return false;
     }
 
