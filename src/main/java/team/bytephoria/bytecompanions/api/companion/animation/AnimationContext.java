@@ -1,7 +1,11 @@
 package team.bytephoria.bytecompanions.api.companion.animation;
 
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.UnmodifiableView;
 import team.bytephoria.bytecompanions.api.companion.anchor.CompanionAnchor;
+
+import java.util.Collection;
 
 /**
  * Snapshot of the companion's state for a single animation tick.
@@ -14,6 +18,11 @@ import team.bytephoria.bytecompanions.api.companion.anchor.CompanionAnchor;
  * so time-based animations should always scale their increments by it.
  */
 public interface AnimationContext {
+
+    /** Players who currently have this companion loaded and visible. **/
+    @NotNull
+    @UnmodifiableView
+    Collection<Player> viewers();
 
     /**
      * The anchor this companion is attached to (normally the owner player).
