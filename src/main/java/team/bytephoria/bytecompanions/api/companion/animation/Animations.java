@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
 
 import java.util.Collection;
+import java.util.Map;
 
 public interface Animations {
 
@@ -11,6 +12,8 @@ public interface Animations {
             final @NotNull String animationId,
             final @NotNull Animation<?> animation
     );
+
+    boolean remove(final @NotNull AnimationChannel channel);
 
     boolean remove(final @NotNull String animationId);
 
@@ -28,7 +31,11 @@ public interface Animations {
 
     @NotNull
     @UnmodifiableView
-    Collection<? extends Animation<?>> get(final @NotNull AnimationChannel channel);
+    Map<String, Animation<?>> getAll(final @NotNull AnimationChannel channel);
+
+    @NotNull
+    @UnmodifiableView
+    Collection<? extends Animation<?>> getAnimations(final @NotNull AnimationChannel channel);
 
     boolean isEmpty(final @NotNull AnimationChannel channel);
 
