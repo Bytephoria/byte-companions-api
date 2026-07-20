@@ -7,7 +7,22 @@ public enum AnimationChannel {
     MOVEMENT,
     ROTATION,
     POSE,
-    FULL_BODY,
-    HEAD_ONLY
+
+    FULL_BODY(true),
+    HEAD_ONLY(true);
+
+    private final boolean singleAnimation;
+
+    AnimationChannel() {
+        this(false);
+    }
+
+    AnimationChannel(final boolean singleAnimation) {
+        this.singleAnimation = singleAnimation;
+    }
+
+    public boolean isSingleAnimation() {
+        return this.singleAnimation;
+    }
 
 }
