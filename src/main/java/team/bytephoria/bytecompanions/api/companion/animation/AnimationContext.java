@@ -19,7 +19,7 @@ import java.util.Collection;
  */
 public interface AnimationContext {
 
-    /** Players who currently have this companion loaded and visible. **/
+    /** Players for whom this companion is currently loaded and rendered by the client. **/
     @NotNull
     @UnmodifiableView
     Collection<Player> viewers();
