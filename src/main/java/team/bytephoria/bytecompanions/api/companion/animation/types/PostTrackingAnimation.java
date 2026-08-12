@@ -2,13 +2,12 @@ package team.bytephoria.bytecompanions.api.companion.animation.types;
 
 import org.jetbrains.annotations.NotNull;
 import team.bytephoria.bytecompanions.api.companion.animation.AnimationChannel;
-import team.bytephoria.bytecompanions.api.companion.animation.output.MovementOutput;
 
-public interface MovementAnimation extends Animation<MovementOutput> {
+public interface PostTrackingAnimation extends Animation<Void> {
 
     @Override
     default @NotNull AnimationChannel channel() {
-        return AnimationChannel.MOVEMENT;
+        return AnimationChannel.POST_TRACKING;
     }
 
 }

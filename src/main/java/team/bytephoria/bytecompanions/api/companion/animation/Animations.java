@@ -2,6 +2,7 @@ package team.bytephoria.bytecompanions.api.companion.animation;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnmodifiableView;
+import team.bytephoria.bytecompanions.api.companion.animation.types.Animation;
 
 import java.util.Collection;
 import java.util.Map;

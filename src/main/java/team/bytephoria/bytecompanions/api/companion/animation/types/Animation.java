@@ -1,6 +1,8 @@
-package team.bytephoria.bytecompanions.api.companion.animation;
+package team.bytephoria.bytecompanions.api.companion.animation.types;
 
 import org.jetbrains.annotations.NotNull;
+import team.bytephoria.bytecompanions.api.companion.animation.AnimationChannel;
+import team.bytephoria.bytecompanions.api.companion.animation.AnimationContext;
 
 public interface Animation<O> {
 

@@ -1,10 +1,11 @@
 package team.bytephoria.bytecompanions.api.user;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import team.bytephoria.bytecompanions.api.companion.Companion;
+import team.bytephoria.bytecompanions.api.companion.CompanionModel;
+import team.bytephoria.bytecompanions.api.companion.data.OwnerData;
 
-import java.util.Optional;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -14,6 +15,8 @@ import java.util.UUID;
  * <p>Instances are created when a player joins and destroyed when they leave.
  */
 public interface CompanionPlayer {
+
+    @NotNull OwnerData ownerData();
 
     /**
      * The unique identifier of the underlying Bukkit player.
@@ -30,18 +33,34 @@ public interface CompanionPlayer {
     @NotNull String playerName();
 
     /**
-     * Returns the companion currently active for this player, if any.
+     * Returns the companions currently active for this player, if any.
      *
-     * @return an optional containing the companion, empty if none is equipped
+     * @return a map containing the companions. Key -> CompanionTypeId, Value -> CapableCompanion
      */
-    @NotNull Optional<Companion> companion();
+    @NotNull Map<String, Companion> companions();
 
     /**
-     * Returns the companion currently active for this player, or {@code null}.
+     * Returns the total number of companions currently equipped for this player.
      *
-     * @return the companion, or {@code null} if none is equipped
+     * @return the count of active companions
      */
-    @Nullable Companion companionOrNull();
+    int companionsActive();
+
+    /**
+     * Returns the number of currently equipped companions that belong to the given model.
+     *
+     * @param companionModel the companion model to filter by
+     * @return the count of active companions matching the given model
+     */
+    int companionsActive(final @NotNull CompanionModel companionModel);
+
+    /**
+     * Returns {@code true} if this player currently has at least one exclusive
+     * companion equipped (a companion type that cannot be equipped alongside others).
+     *
+     * @return whether an exclusive companion is active
+     */
+    boolean hasAnyExclusive();
 
     /**
      * Returns {@code true} if this player currently has a companion equipped.
@@ -51,24 +70,34 @@ public interface CompanionPlayer {
     boolean hasCompanion();
 
     /**
-     * Returns the type ID of the companion last saved for this player.
+     * Returns {@code true} if this player currently has the given companion type equipped.
      *
-     * @return an optional containing the companion type ID, empty if none was ever set
+     * @param companionTypeId the companion type ID to check
+     * @return whether this companion type is active
      */
-    @NotNull Optional<String> companionTypeId();
+    boolean hasCompanion(final @NotNull String companionTypeId);
 
     /**
-     * Despawns and removes the current companion.
+     * Despawns and removes the companion matching the given type ID, if equipped.
+     * No-op if that companion type is not currently equipped.
+     *
+     * @param companionTypeId the companion type ID to unequip
+     */
+    void unequip(final @NotNull String companionTypeId);
+
+    /**
+     * Despawns and removes all currently equipped companions.
      * No-op if no companion is equipped.
      */
     void unequip();
 
     /**
-     * Sets the active companion for this player.
-     * Replaces any existing companion without saving to storage.
+     * Equips the given companion for this player, without saving to storage.
+     * Multiple companions may be equipped simultaneously; this adds to the
+     * existing set rather than replacing it.
      *
-     * @param companion the new companion, or {@code null} to clear
+     * @param companion the companion to equip
      */
-    void companion(final @Nullable Companion companion);
+    void equip(final @NotNull Companion companion);
 
 }

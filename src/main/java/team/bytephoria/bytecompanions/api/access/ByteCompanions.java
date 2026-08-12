@@ -1,8 +1,9 @@
 package team.bytephoria.bytecompanions.api.access;
 
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import team.bytephoria.bytecompanions.api.companion.Companion;
+import team.bytephoria.bytecompanions.api.ConfigurationSettings;
 import team.bytephoria.bytecompanions.api.companion.CompanionManager;
 import team.bytephoria.bytecompanions.api.companion.CompanionType;
 import team.bytephoria.bytecompanions.api.companion.CompanionTypeRegistry;
@@ -18,29 +19,62 @@ public interface ByteCompanions {
         return ByteCompanionsProvider.getInstance();
     }
 
+    @NotNull ConfigurationSettings configurationSettings();
+
     @NotNull CompanionTypeRegistry typeRegistry();
     @NotNull CompanionManager companionManager();
     @NotNull AnimationRegistry animationRegistry();
 
-    @Nullable CompanionPlayer getPlayerOrNull(@NotNull UUID playerId);
-    @NotNull Optional<CompanionPlayer> getPlayer(final @NotNull UUID playerId);
+    // Helper Methods
 
-    default @Nullable Companion getCompanionOrNull(final @NotNull UUID playerId) {
-        final CompanionPlayer companionPlayer = this.getPlayerOrNull(playerId);
-        if (companionPlayer == null) {
-            return null;
-        }
+    /**
+     * Returns the companion type with the specified ID.
+     *
+     * @param typeId the companion type ID
+     * @return an optional containing the companion type, or empty if not found
+     */
+    @NotNull Optional<CompanionType> getCompanionType(final @Nullable String typeId);
 
-        return companionPlayer.companionOrNull();
-    }
+    /**
+     * Returns the companion type with the specified ID, or {@code null} if not found.
+     *
+     * @param typeId the companion type ID
+     * @return the companion type, or {@code null} if not found
+     */
+    @Nullable CompanionType getCompanionTypeOrNull(final @Nullable String typeId);
 
-    default Optional<Companion> getCompanion(final @NotNull UUID playerId) {
-        final Companion companion = this.getCompanionOrNull(playerId);
-        return Optional.ofNullable(companion);
-    }
+    /**
+     * Returns the companion player associated with the specified player.
+     *
+     * @param player the player
+     * @return an optional containing the companion player, or empty if none exists
+     */
+    @NotNull Optional<CompanionPlayer> getCompanionPlayer(final @NotNull Player player);
 
-    default @NotNull Optional<CompanionType> getType(final @NotNull String typeId) {
-        return this.typeRegistry().get(typeId);
-    }
+    /**
+     * Returns the companion player associated with the specified player,
+     * or {@code null} if none exists.
+     *
+     * @param player the player
+     * @return the companion player, or {@code null} if none exists
+     */
+    @Nullable CompanionPlayer getCompanionPlayerOrNull(final @NotNull Player player);
+
+    /**
+     * Returns the companion player associated with the specified player UUID.
+     *
+     * @param playerId the player UUID
+     * @return an optional containing the companion player, or empty if none exists
+     */
+    @NotNull Optional<CompanionPlayer> getCompanionPlayer(final @NotNull UUID playerId);
+
+    /**
+     * Returns the companion player associated with the specified player UUID,
+     * or {@code null} if none exists.
+     *
+     * @param playerId the player UUID
+     * @return the companion player, or {@code null} if none exists
+     */
+    @Nullable CompanionPlayer getCompanionPlayerOrNull(final @NotNull UUID playerId);
 
 }

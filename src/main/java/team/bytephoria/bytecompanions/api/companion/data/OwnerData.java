@@ -1,13 +1,25 @@
 package team.bytephoria.bytecompanions.api.companion.data;
 
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.UUID;
 
-public interface OwnerData {
+public record OwnerData(
+        @NotNull UUID uniqueId,
+        @NotNull String name
+) {
 
-    @NotNull UUID id();
+    public OwnerData {
+        Objects.requireNonNull(uniqueId);
+        Objects.requireNonNull(name);
+    }
 
-    @NotNull String name();
+    @Contract("_ -> new")
+    public static @NotNull OwnerData fromPlayer(final @NotNull Player player) {
+        return new OwnerData(player.getUniqueId(), player.getName());
+    }
 
 }

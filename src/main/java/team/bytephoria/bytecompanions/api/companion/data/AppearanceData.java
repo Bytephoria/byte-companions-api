@@ -2,7 +2,7 @@ package team.bytephoria.bytecompanions.api.companion.data;
 
 import org.jetbrains.annotations.Nullable;
 
-public record CompanionAppearanceData(
+public record AppearanceData(
         boolean small,
         boolean visible,
         boolean showArms,

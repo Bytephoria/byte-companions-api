@@ -12,7 +12,12 @@ public interface CompanionTypeRegistry {
 
     @NotNull Optional<CompanionType> get(final @NotNull String id);
 
-    void register(final @NotNull String id, final @NotNull CompanionType companionType);
+    void register(
+            final @NotNull String id,
+            final @NotNull CompanionType companionType
+    );
+
+    void clear();
 
     @NotNull Collection<CompanionType> all();
 

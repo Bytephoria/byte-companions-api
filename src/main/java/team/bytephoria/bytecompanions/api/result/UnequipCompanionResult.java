@@ -5,6 +5,7 @@ public enum UnequipCompanionResult {
     SUCCESS,
     NO_COMPANION_ACTIVE,
     PLAYER_NOT_LOADED,
+    BUKKIT_PLAYER_NOT_FOUND,
     CANCELLED
 
 }

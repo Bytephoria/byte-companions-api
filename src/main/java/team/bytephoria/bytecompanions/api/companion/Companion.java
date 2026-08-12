@@ -4,8 +4,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import team.bytephoria.bytecompanions.api.companion.anchor.CompanionAnchor;
 import team.bytephoria.bytecompanions.api.companion.data.OwnerData;
+import team.bytephoria.bytecompanions.api.companion.entity.OverlayCapableCompanionEntity;
 
-public interface Companion extends CompanionEntity {
+public interface Companion extends OverlayCapableCompanionEntity {
 
     @Nullable OwnerData ownerData();
 
@@ -16,5 +17,7 @@ public interface Companion extends CompanionEntity {
     default boolean hasOwner() {
         return this.ownerData() != null;
     }
+
+    void formationIndex(final int index, final int count);
 
 }
