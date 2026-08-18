@@ -37,7 +37,7 @@ public interface CompanionManager {
             final @NotNull CompanionType companionType
     );
 
-    @NotNull Response<UnequipCompanionResult> unequip(
+    @NotNull ResponseContext<Collection<String>, UnequipCompanionResult> unequip(
             final @NotNull Player player,
             final @NotNull CompanionPlayer companionPlayer
     );
